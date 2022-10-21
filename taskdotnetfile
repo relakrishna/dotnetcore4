@@ -1,0 +1,21 @@
+pipeline {
+    agent {label ".net6"}
+    stages {
+        stage('clone') {
+            steps {
+                 git url:'https://github.com/GitPracticeRepo/dotnetcore-docs-hello-world.git',
+                 branch: 'master'
+            }
+        }
+        stage('build') {
+            steps {
+                 sh 'dotnet build dotnetcoresample.csproj'
+            }
+        }
+        stage('package') {
+            steps {
+                 sh 'dotnet publish dotnetcoresample.csproj'
+            }
+        }
+    }
+}
